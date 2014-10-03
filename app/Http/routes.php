@@ -20,3 +20,4 @@ Route::get('/contact', function() {
 });
 
 Route::get('/calendar', 'CalendarController@index');
+Route::get('/calendar/{monthNum}', 'CalendarController@month');

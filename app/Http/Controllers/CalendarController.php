@@ -4,98 +4,76 @@ use Illuminate\Routing\Controller;
 
 class CalendarController extends Controller {
  
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	/*
+		Display the calendar with the current month
 	 */
 	public function index() {
 
-		// the start day of the current month
-		$start = date('w',mktime(0, 0, 0, date('n'), 1, date('Y')));
-		$start = $start - 1;
-		// the amount of days of the previous month
-		$maxDaysPrevMonth = cal_days_in_month(CAL_GREGORIAN, date('m')-1, date('Y'));
-		for($i = 0; $i<$start;$i++) {
-			// store the last x days of the previous month in the prevMonth array
-			$prevMonth[$i] = $maxDaysPrevMonth -1 + $i;
-		}
-		// the amount of days in the current month
-		$maxDays = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+		$dates = $this->getDate(date('n'));
 
-		return view('calendar.index', ['maxDays' => $maxDays, 'start' => $start, 'prevMonth' => $prevMonth]);
+		return view('calendar.index', [
+			'month' => $dates['month'], 
+			'monthNum' => $dates['monthNum'], 
+			'year' => $dates['year'], 
+			'maxDays' => $dates['daysMonth'], 
+			'start' => $dates['start'], 
+			'prevMonth' => $dates['daysOfPrevMonth']]);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	/*
+		Display the calendar with the requested month
 	 */
-	public function create()
-	{
-		//
-	}
+	public function month($monthNum) {
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-	public function month() {
-
+		$dates = $this->getDate($monthNum);
+		return view('calendar.index', [
+			'month' => $dates['month'], 
+			'monthNum' => $monthNum, 
+			'year' => $dates['year'], 
+			'maxDays' => $dates['daysMonth'], 
+			'start' => $dates['start'], 
+			'prevMonth' => $dates['daysOfPrevMonth']]);
 	}
 
 	public function monthDay() {
 
+	}
+
+	/*
+		Get the date information needed to display the calendar.
+		year: the year to be displayed
+		month: the month to be displayed
+		monthNum: the numeric value of the month to be displayed
+		start: the numeric value of the starting day of month
+		daysMonth: the amount of days in month
+		daysPrevMonth: the amount of days in the previous month
+	 */
+	private function getDate($monthNum) {
+
+		$dates = [
+			'year' => ceil(($monthNum / 12) -1) + date('Y'),
+			'month' => date('F', mktime(0, 0, 0, $monthNum, 1, date('Y'))),
+			'monthNum' => $monthNum,
+			'start' => date('w',mktime(0, 0, 0, $monthNum, 1, date('Y'))) - 1,
+			'daysMonth' => date('t', mktime(0, 0, 0, $monthNum, 1, date('Y'))),
+			'daysPrevMonth' => date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')))
+		];
+		$dates['daysOfPrevMonth'] = $this->daysOfPrevMonth($dates['daysPrevMonth'], $dates['start']);
+
+		return $dates;
+	}
+
+	/*
+		Depending on the start of the current month, get the last number of days of the previous month 
+		needed and store them in the prevMonth array.
+	 */
+	private function daysOfPrevMonth($daysPrevMonth, $start) {
+		$prevMonth = [];
+		for($i = 0; $i<$start;$i++) {
+			$prevMonth[$i] = $daysPrevMonth -$start + 1 + $i;
+		}
+
+		return $prevMonth;
 	}
 
 }

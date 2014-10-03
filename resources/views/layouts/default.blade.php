@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Autopoets</title>
-		<link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+		<link href="/css/stylesheet.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div class="header">
