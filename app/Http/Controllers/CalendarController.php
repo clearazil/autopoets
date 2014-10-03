@@ -32,7 +32,9 @@ class CalendarController extends Controller {
 			'year' => $dates['year'], 
 			'maxDays' => $dates['daysMonth'], 
 			'start' => $dates['start'], 
-			'prevMonth' => $dates['daysOfPrevMonth']]);
+			'prevMonth' => $dates['daysOfPrevMonth'],
+			'daysPrevMonth' => $dates['daysPrevMonth']
+		]);
 	}
 
 	public function monthDay() {
@@ -50,16 +52,17 @@ class CalendarController extends Controller {
 	 */
 	private function getDate($monthNum) {
 
-		$dates = [
-			'year' => ceil(($monthNum / 12) -1) + date('Y'),
-			'month' => date('F', mktime(0, 0, 0, $monthNum, 1, date('Y'))),
-			'monthNum' => $monthNum,
-			'start' => date('w',mktime(0, 0, 0, $monthNum, 1, date('Y'))) - 1,
-			'daysMonth' => date('t', mktime(0, 0, 0, $monthNum, 1, date('Y'))),
-			'daysPrevMonth' => date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')))
-		];
+		$dates['year'] = ceil(($monthNum / 12) -1) + date('Y');
+		$dates['month'] = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		$dates['monthNum'] = $monthNum;
+		$dates['start'] = date('w',mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		$dates['daysMonth'] = date('t', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		$dates['daysPrevMonth'] = date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')));
+		
+		if($dates['start'] == 0) {
+			$dates['start'] = 7;
+		}
 		$dates['daysOfPrevMonth'] = $this->daysOfPrevMonth($dates['daysPrevMonth'], $dates['start']);
-
 		return $dates;
 	}
 
@@ -68,12 +71,14 @@ class CalendarController extends Controller {
 		needed and store them in the prevMonth array.
 	 */
 	private function daysOfPrevMonth($daysPrevMonth, $start) {
+
 		$prevMonth = [];
-		for($i = 0; $i<$start;$i++) {
-			$prevMonth[$i] = $daysPrevMonth -$start + 1 + $i;
+		for($i = 0; $i < $start-1; $i++) {
+			$prevMonth[$i] = $daysPrevMonth - $i;
 		}
 
-		return $prevMonth;
+
+		return array_reverse($prevMonth);
 	}
 
 }
