@@ -33,7 +33,6 @@ class CalendarController extends Controller {
 			'maxDays' => $dates['daysMonth'], 
 			'start' => $dates['start'], 
 			'prevMonth' => $dates['daysOfPrevMonth'],
-			'daysPrevMonth' => $dates['daysPrevMonth']
 		]);
 	}
 
@@ -62,6 +61,7 @@ class CalendarController extends Controller {
 		if($dates['start'] == 0) {
 			$dates['start'] = 7;
 		}
+		
 		$dates['daysOfPrevMonth'] = $this->daysOfPrevMonth($dates['daysPrevMonth'], $dates['start']);
 		return $dates;
 	}
