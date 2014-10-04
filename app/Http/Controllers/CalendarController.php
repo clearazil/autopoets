@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use App\Calendar;
+use Redirect;
 
 class CalendarController extends Controller {
  
@@ -9,15 +11,24 @@ class CalendarController extends Controller {
 	 */
 	public function index() {
 
-		$dates = $this->getDate(date('n'));
-
+		$dates = Calendar::getDate(date('n'));
+		//$calendarDates = Calendar::whereDate("2014-11-05")->first();
+		$calendarDates = Calendar::get();
 		return view('calendar.index', [
 			'month' => $dates['month'], 
 			'monthNum' => $dates['monthNum'], 
 			'year' => $dates['year'], 
 			'maxDays' => $dates['daysMonth'], 
 			'start' => $dates['start'], 
-			'prevMonth' => $dates['daysOfPrevMonth']]);
+			'prevMonth' => $dates['daysOfPrevMonth'],
+			'calendar' => $calendarDates
+		]);
+	}
+
+	public function show() {
+		$date = Calendar::get();
+
+		return view('calendar.date', compact('date'));
 	}
 
 	/*
@@ -25,7 +36,8 @@ class CalendarController extends Controller {
 	 */
 	public function month($monthNum) {
 
-		$dates = $this->getDate($monthNum);
+		$dates = Calendar::getDate($monthNum);
+		$calendarDates = Calendar::get();
 		return view('calendar.index', [
 			'month' => $dates['month'], 
 			'monthNum' => $monthNum, 
@@ -33,52 +45,27 @@ class CalendarController extends Controller {
 			'maxDays' => $dates['daysMonth'], 
 			'start' => $dates['start'], 
 			'prevMonth' => $dates['daysOfPrevMonth'],
+			'calendar' => $calendarDates
 		]);
 	}
 
-	public function monthDay() {
-
-	}
-
 	/*
-		Get the date information needed to display the calendar.
-		year: the year to be displayed
-		month: the month to be displayed
-		monthNum: the numeric value of the month to be displayed
-		start: the numeric value of the starting day of month
-		daysMonth: the amount of days in month
-		daysPrevMonth: the amount of days in the previous month
+		Get the full date.
+		If the date is invalid, redirect back to the Calendar.
 	 */
-	private function getDate($monthNum) {
-
-		$dates['year'] = ceil(($monthNum / 12) -1) + date('Y');
-		$dates['month'] = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
-		$dates['monthNum'] = $monthNum;
-		$dates['start'] = date('w',mktime(0, 0, 0, $monthNum, 1, date('Y')));
-		$dates['daysMonth'] = date('t', mktime(0, 0, 0, $monthNum, 1, date('Y')));
-		$dates['daysPrevMonth'] = date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')));
-		
-		if($dates['start'] == 0) {
-			$dates['start'] = 7;
+	public function monthDay($monthNum, $dayNum) {
+		$year = ceil(($monthNum / 12) -1) + date('Y');
+		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
+		if(!checkdate($monthNum,$dayNum,$year)) {
+			return Redirect::to('/calendar/' . $monthNum);
 		}
-		
-		$dates['daysOfPrevMonth'] = $this->daysOfPrevMonth($dates['daysPrevMonth'], $dates['start']);
-		return $dates;
+		$date = $year . "-" . $calcMonth . "-" . $dayNum;
+		return $date;
 	}
 
-	/*
-		Depending on the start of the current month, get the last number of days of the previous month 
-		needed and store them in the prevMonth array.
-	 */
-	private function daysOfPrevMonth($daysPrevMonth, $start) {
-
-		$prevMonth = [];
-		for($i = 0; $i < $start-1; $i++) {
-			$prevMonth[$i] = $daysPrevMonth - $i;
-		}
 
 
-		return array_reverse($prevMonth);
-	}
+
+
 
 }

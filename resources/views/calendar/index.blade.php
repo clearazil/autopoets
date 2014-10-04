@@ -3,6 +3,8 @@
 	<span><a href="/">Home</a> <a href="/contact">Contact</a> <a href="/calendar">Kalender</a> <a href="/products">Producten</a></span>
 @stop
 @section('content')
+	{{ dd($calendar) }}
+	{{ $calendar->date['2014-11-05'] }}
 
 	<div class="calendar">
 		<h3>Kalender</h3>

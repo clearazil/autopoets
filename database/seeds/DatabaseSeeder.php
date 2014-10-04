@@ -14,7 +14,19 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		$this->call('CalendarTableSeeder');
 	}
 
+}
+
+class CalendarTableSeeder extends Seeder {
+
+	public function run() {
+		Calendar::create([
+			'title' => 'Hierrrrrr',
+			'address' => 'Koekoekshof 35',
+			'description' => 'Vandaag sta ik hier!',
+			'date' => '30-07-2015'
+			]);
+	}
 }
