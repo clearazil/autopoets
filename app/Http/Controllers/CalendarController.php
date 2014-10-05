@@ -6,48 +6,51 @@ use Redirect;
 
 class CalendarController extends Controller {
  
-	/*
-		Display the calendar with the current month
-	 */
-	public function index() {
+	
 
-		$dates = Calendar::getDate(date('n'));
-		//$calendarDates = Calendar::whereDate("2014-11-05")->first();
-		$calendarDates = Calendar::get();
-		return view('calendar.index', [
-			'month' => $dates['month'], 
-			'monthNum' => $dates['monthNum'], 
-			'year' => $dates['year'], 
-			'maxDays' => $dates['daysMonth'], 
-			'start' => $dates['start'], 
-			'prevMonth' => $dates['daysOfPrevMonth'],
-			'calendar' => $calendarDates
-		]);
+
+	public function index($monthNum = "") {
+		if(!strlen($monthNum)) {
+			$monthNum = date('n');
+		}
+		$daysMonth = date('t', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		$firstDay = date('w',mktime(0, 0, 0, $monthNum, 1, date('Y')));
+
+		$year = ceil(($monthNum / 12) -1) + date('Y');
+
+		$month = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+
+		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
+
+		//$date = Calendar::select('date')->whereRaw("date between '$year-$calcMonth-01' and '$year-$calcMonth-$daysMonth'")->get();
+		$dates = Calendar::whereBetween("date", array("$year-$calcMonth-01", "$year-$calcMonth-$daysMonth"))->get();
+
+		$links = [];
+		foreach($dates as $date) {
+			$links[] = date('j', strtotime($date->date));
+		}
+
+		$links = array_flip($links);
+		
+
+
+		if($firstDay == 0) {
+			$firstDay = 7;
+		}
+		$firstDay = $firstDay - 1;
+		$prevMonth = date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')));
+		$days = [];
+		for($i=$prevMonth-$firstDay;$i<$prevMonth;$i++) {
+			$days[] = $i+1;
+		}
+
+		for($i=1;$i<=$daysMonth;$i++) {
+			$days[] = $i;
+		}
+		
+		return view('calendar.index', compact('days', 'month', 'monthNum', 'year', 'dates', 'links', 'firstDay'));
 	}
 
-	public function show() {
-		$date = Calendar::get();
-
-		return view('calendar.date', compact('date'));
-	}
-
-	/*
-		Display the calendar with the requested month
-	 */
-	public function month($monthNum) {
-
-		$dates = Calendar::getDate($monthNum);
-		$calendarDates = Calendar::get();
-		return view('calendar.index', [
-			'month' => $dates['month'], 
-			'monthNum' => $monthNum, 
-			'year' => $dates['year'], 
-			'maxDays' => $dates['daysMonth'], 
-			'start' => $dates['start'], 
-			'prevMonth' => $dates['daysOfPrevMonth'],
-			'calendar' => $calendarDates
-		]);
-	}
 
 	/*
 		Get the full date.
@@ -62,8 +65,6 @@ class CalendarController extends Controller {
 		$date = $year . "-" . $calcMonth . "-" . $dayNum;
 		return $date;
 	}
-
-
 
 
 

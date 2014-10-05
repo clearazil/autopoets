@@ -3,8 +3,8 @@
 	<span><a href="/">Home</a> <a href="/contact">Contact</a> <a href="/calendar">Kalender</a> <a href="/products">Producten</a></span>
 @stop
 @section('content')
-	{{ dd($calendar) }}
-	{{ $calendar->date['2014-11-05'] }}
+	{{ $firstDay }}
+	
 
 	<div class="calendar">
 		<h3>Kalender</h3>
@@ -20,19 +20,24 @@
 				<td>Za</td>
 				<td>Zo</td>
 			</tr>
-			@for($i=0;$i<($maxDays+$start-1);$i++)
-				@if(($i % 7) == 0)
+
+
+			@foreach($days as $key => $day)
+				@if(($key % 7) == 0)
 					<tr>
 				@endif
-				@if($i <= $start-2)
-					 <td>{{ $prevMonth[$i] }}</td> 
-				@else
-					<td>{{ $i - $start + 2 }}</td>
+				<td>
+					@if(isset($links[$key-$firstDay+1]))
+						<a href="/calendar/{{ $monthNum }}/{{ $day }} ">{{ $day }}</a>
+					@else 
+						{{ $day }}
+					@endif
+
+				</td>
+				@if(($key % 7) == 6)
+					</tr>
 				@endif
-				@if(($i % 7) == 6)
-				 	</tr>
-				@endif
-			@endfor
+			@endforeach
 
 		</table>
 	</div>
