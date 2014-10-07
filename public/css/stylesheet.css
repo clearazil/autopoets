@@ -2,3 +2,15 @@ table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
+
+label {
+	width: 4em;
+	float: left;
+	margin-right: 0.5em;
+	display: block;
+}
+
+.contact input[type="submit"] {
+	margin-left: 5.5em;
+}
+

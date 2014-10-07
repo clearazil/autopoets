@@ -4,12 +4,44 @@ use Illuminate\Routing\Controller;
 use App\Calendar;
 use Redirect;
 
-class CalendarController extends Controller {
+class CalendarController {
  
 	
 
 
 	public function index($monthNum = "") {
+
+		$calendar = $this->calendar($monthNum);
+
+		return view('calendar.index', array(
+			'days' => $calendar['days'],
+			'month' => $calendar['month'],
+			'monthNum' => $calendar['monthNum'],
+			'year' => $calendar['year'],
+			'dates' => $calendar['dates'],
+			'links' => $calendar['links'],
+			'firstDay' => $calendar['firstDay']
+		));
+			
+	}
+
+
+	/*
+		Get the full date.
+		If the date is invalid, redirect back to the Calendar.
+	 */
+	public function monthDay($monthNum, $dayNum) {
+		$year = ceil(($monthNum / 12) -1) + date('Y');
+		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
+		if(!checkdate($monthNum,$dayNum,$year)) {
+			return Redirect::to('/calendar/' . $monthNum);
+		}
+		$date = $year . "-" . $calcMonth . "-" . $dayNum;
+		return $date;
+	}
+
+	public function calendar($monthNum) {
+
 		if(!strlen($monthNum)) {
 			$monthNum = date('n');
 		}
@@ -22,7 +54,6 @@ class CalendarController extends Controller {
 
 		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
 
-		//$date = Calendar::select('date')->whereRaw("date between '$year-$calcMonth-01' and '$year-$calcMonth-$daysMonth'")->get();
 		$dates = Calendar::whereBetween("date", array("$year-$calcMonth-01", "$year-$calcMonth-$daysMonth"))->get();
 
 		$links = [];
@@ -47,26 +78,38 @@ class CalendarController extends Controller {
 		for($i=1;$i<=$daysMonth;$i++) {
 			$days[] = $i;
 		}
-		
-		return view('calendar.index', compact('days', 'month', 'monthNum', 'year', 'dates', 'links', 'firstDay'));
+
+		$calendar['days'] = $days;
+		$calendar['month'] = $month;
+		$calendar['monthNum'] = $monthNum;
+		$calendar['year'] = $year;
+		$calendar['dates'] = $dates;
+		$calendar['links'] = $links;
+		$calendar['firstDay'] = $firstDay;
+
+		return $calendar;
 	}
 
+	public function show($monthNum, $dayNum) {
 
-	/*
-		Get the full date.
-		If the date is invalid, redirect back to the Calendar.
-	 */
-	public function monthDay($monthNum, $dayNum) {
-		$year = ceil(($monthNum / 12) -1) + date('Y');
+		$calendar = $this->calendar($monthNum);
 		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
-		if(!checkdate($monthNum,$dayNum,$year)) {
-			return Redirect::to('/calendar/' . $monthNum);
-		}
-		$date = $year . "-" . $calcMonth . "-" . $dayNum;
-		return $date;
+		$date = $calendar['year'] . "-" . $calcMonth . "-" . $dayNum;
+		
+		$calendarInfo = Calendar::where('date', '=', "$date")->first();
+
+
+		return view('calendar.show', array(
+			'calendarInfo' => $calendarInfo,
+			'days' => $calendar['days'],
+			'month' => $calendar['month'],
+			'monthNum' => $calendar['monthNum'],
+			'year' => $calendar['year'],
+			'dates' => $calendar['dates'],
+			'links' => $calendar['links'],
+			'firstDay' => $calendar['firstDay']
+		));
 	}
-
-
 
 
 }
