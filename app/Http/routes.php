@@ -15,9 +15,9 @@ Route::get('/', function() {
 	return view('index');
 });
 
-Route::get('/contact', function() {
-	return view('contact.index');
-});
+Route::get('/contact', 'ContactController@index');
+
+Route::post('contact', 'ContactController@send');
 
 Route::get('/calendar', 'CalendarController@index');
 Route::get('/calendar/date', 'CalendarController@show');
