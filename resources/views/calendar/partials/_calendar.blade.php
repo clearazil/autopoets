@@ -1,5 +1,5 @@
 <div class="calendar">
-	<h3>Kalender</h3>
+	<h1>Kalender</h3>
 	<a href="/calendar/{{ $monthNum-1 }}"><</a> {{ $month }} <a href="/calendar/{{ $monthNum+1 }}">></a>
 	<a href="/calendar/{{ $monthNum-12 }}"><</a> {{ $year }} <a href="/calendar/{{ $monthNum+12 }}">></a>
 	<table>

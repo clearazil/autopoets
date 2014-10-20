@@ -10,7 +10,44 @@ label {
 	display: block;
 }
 
+.content {
+	width: 90%;
+	margin: 0 auto;
+}
+.header {
+	padding-bottom: 2em;
+}
+
+.nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.nav li {
+	display: inline;
+}
+.nav .active {
+	color: white;
+	background: black;
+}
+.nav li a {
+	text-decoration: none;
+	text-align: center;
+	padding: 3px 10px;
+	background: #eee;
+	color: #000;
+}
 .contact input[type="submit"] {
 	margin-left: 5.5em;
+}
+
+.products li {
+	list-style: none;
+	border: 1px solid;
+	border-radius: 2px;
+	width: 220px;
+	text-align: center;
+	position: relative;
+	display: inline-block;
 }
 

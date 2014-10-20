@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('nav')
 	<nav>
             <ul class="menu">
@@ -16,7 +15,16 @@
 <section id="content">
     <div class="container_12">
         <div class="">
-	@include('calendar/partials/_calendar')	
+	<div class="products">
+		<ul>
+		@foreach($products as $product)
+			<li>
+				{{ $product->product_name }}
+				<img src="{{ $product->product_img }}" alt="{{ $product->product_name }}">
+			</li>
+		@endforeach
+		</ul>
+	</div>
 		</div>
 	</div>
 </section>

@@ -19,7 +19,8 @@ Route::get('/contact', 'ContactController@index');
 
 Route::post('contact', 'ContactController@send');
 
-Route::get('/calendar', 'CalendarController@index');
+Route::get('/calendar', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 Route::get('/calendar/date', 'CalendarController@show');
 Route::get('/calendar/{month}', 'CalendarController@index');
 Route::get('/calendar/{monthNum}/{dayNum}/', 'CalendarController@show');
+Route::get('/products', 'ProductsController@index');

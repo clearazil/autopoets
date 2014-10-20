@@ -1,9 +1,21 @@
 @extends('layouts.default')
 @section('nav')
-	<span><a href="/">Home</a> <a href="/contact">Contact</a> <a href="/calendar">Kalender</a> <a href="/products">Producten</a></span>
+	<nav>
+            <ul class="menu">
+                <li>{!! link_to('/', 'Home') !!}</li>
+                <li>{!! link_to('about', 'Over Mij') !!}</li>
+                <li> {!! link_to('calendar', 'Agenda', ['class' => 'active']) !!}</li>
+                <li class="fright">{!! link_to('contact', 'Contact') !!}</li>
+                <li class="fright">{!! link_to('products', 'Producten') !!}</li>
+                <li class="fright un_border">{!! link_to('gallery', 'Gallerij') !!}</li>
+            </ul>
+	</nav>
+
 @stop
 @section('content')
-	<div class="contact">
+<section id="content">
+    <div class="container_12">
+        <div class="">
 	@if(isset($thanks))
 		{{ $thanks }}
 	@endif
@@ -25,6 +37,9 @@
 		</div>
 		{!! Form::submit('Verzenden') !!}
 	{!! Form::close() !!}
+		</div>
 	</div>
+</section>
+
 @stop
 
