@@ -99,7 +99,7 @@ class CalendarController {
 		$calendarInfo = Calendar::where('date', '=', "$date")->first();
 
 
-		return view('calendar.show', array(
+		return view('calendar.index', array(
 			'calendarInfo' => $calendarInfo,
 			'days' => $calendar['days'],
 			'month' => $calendar['month'],

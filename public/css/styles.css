@@ -8,7 +8,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 @import"reset.css";
 @import"grid.css";
 
-body{background:#000000 url(/images/back_all.jpg) fixed center top no-repeat;font:13px/22px Arial, Times, serif;color:#fff;position:relative;min-width:980px;}
+body{background:#000000 url(../images/back_all.jpg) fixed center top no-repeat;font:13px/22px Arial, Times, serif;color:#fff;position:relative;min-width:980px;}
 html,body{height:100%;}
 p,.p{padding-bottom:22px;}
 .p0 {padding-bottom:0 !important;}
@@ -42,13 +42,13 @@ h6{font-size:20px;}
 .color2{color:#fff;}
 /*********************************header*************************************/
 header {
-	background:url(/images/header.png) left top repeat;
+	background:url(../images/header.png) left top repeat;
 }
 .header_bg1 {
-	background:url(/images/header_bg1.png) center top no-repeat;
+	background:url(../images/header_bg1.png) center top no-repeat;
 }
 .header_bg2 {
-	background:url(/images/header_bg2.png) center top repeat-x;
+	background:url(../images/header_bg2.png) center top repeat-x;
 	padding:67px 0 60px;
 	position:relative;
 }
@@ -181,14 +181,14 @@ footer a {
 	top:50%;
 	bottom:50%;
 	right:50%;
-	background:url(/images/light_box.png) left top repeat;
+	background:url(../images/light_box.png) left top repeat;
 -webkit-transition: all 0.5s ease;
 -moz-transition: all 0.5s ease;
 -o-transition: all 0.5s ease;
 transition: all 0.5s ease;
 }
 .figure-2 .lightbox-image-2 b {
-	background:url(/images/plus.png) center center no-repeat;
+	background:url(../images/plus.png) center center no-repeat;
 	opacity:0;
 }
 .figure-2 .lightbox-image-2:hover b {
@@ -223,7 +223,7 @@ nav {
 	text-transform:uppercase;
 }
 .menu>li,.menu>li.un_border {
-	background:url(/images/border.png) left 3px no-repeat;
+	background:url(../images/border.png) left 3px no-repeat;
 	padding-left:18px;
 	margin-left:16px;
 }
@@ -261,7 +261,7 @@ nav {
 	position:absolute;
 	width:14px;
 	height:12px;
-	background:url(/images/sub-1.png) left top no-repeat;
+	background:url(../images/sub-1.png) left top no-repeat;
 	overflow:hidden;
 	top:-999em;
 	text-indent:-999em;
@@ -285,7 +285,7 @@ nav {
 .menu ul li {width:	100%;}
 .menu li:hover {visibility:	inherit; }
 .menu li li {
-	background:url(/images/menu.png) center top no-repeat;
+	background:url(../images/menu.png) center top no-repeat;
 	margin:0;
 	border:none;
 }
@@ -309,10 +309,10 @@ nav {
 
 /*********************************bg's*************************************/
 .bg-1 {
-	background:url(/images/bg-1.jpg) center top no-repeat #dcf4fd;
+	background:url(../images/bg-1.jpg) center top no-repeat #dcf4fd;
 }
 .bg-2 {
-	background:url(/images/bg-2.png) left top repeat-x;
+	background:url(../images/bg-2.png) left top repeat-x;
 	padding:37px 0;
 }
 .border-1 {
@@ -382,7 +382,7 @@ nav {
 	font-size:13px;
 	line-height:16px;
 	padding:7px 0 8px 20px;
-	background:url(/images/list-1.png) left 10px no-repeat;
+	background:url(../images/list-1.png) left 10px no-repeat;
 	font-weight:bold;
 }
 .list-1 li a {
@@ -406,7 +406,7 @@ nav {
 
 
 #slider-wrapper {
-    background:url(/images/top.jpg) no-repeat;
+    background:url(../images/top.jpg) no-repeat;
     width: 926px;
     height: 302px;
     margin:0 auto;
@@ -416,7 +416,7 @@ nav {
 	position:relative;
     width: 926px;
     height: 302px;
-	background:url(/images/loading.gif) no-repeat 50% 50%;
+	background:url(../images/loading.gif) no-repeat 50% 50%;
 }
 #slider img {
 	position:absolute;
@@ -438,7 +438,7 @@ nav {
 	display:block;
 	width:22px;
 	height:22px;
-	background:url(/images/bp.png) no-repeat;
+	background:url(../images/bp.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin-right:3px;
@@ -446,14 +446,14 @@ nav {
 }
 .nivo-controlNav a.active {
 	background-position:0 -22px;
-	background:url(/images/bp_hover.png) no-repeat;
+	background:url(../images/bp_hover.png) no-repeat;
 }
 
 .nivo-directionNav a {
 	display:block;
 	width:30px;
 	height:30px;
-	background:url(/images/arrows.png) no-repeat;
+	background:url(../images/arrows.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
 }

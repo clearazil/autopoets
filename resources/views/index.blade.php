@@ -1,16 +1,4 @@
 @extends('layouts.default')
-@section('nav')
-	<nav>
-            <ul class="menu">
-                <li><a class="active" href="/">Home</a></li>
-                <li><a href="#">Over Mij</a></li>
-                <li><a href="/calendar">Agenda</a></li>
-                <li class="fright"><a href="contact">Contact</a></li>
-                <li class="fright"><a href="products">Producten</a></li>
-                <li class="fright un_border"><a href="#">Gallerij</a></li>
-            </ul>
-	</nav>
-@stop
 @section('content')
 	<!-- Content -->
 <section id="content">
