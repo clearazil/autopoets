@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Some Template Title</title>
+        <title>Autopoets</title>
     <meta name="description" content="Your description">
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
@@ -15,7 +15,7 @@
 	<header>
     	<div class="header_bg1">
             <div class="header_bg2">
-                <h1><a href="#">Errit Sjoerd</a></h1>
+                <h1>{!! link_to('/', 'Errit Sjoerd') !!}</h1>
 				<h2>Autopoets</h2>
             	<div class="main">
         	 		<nav>

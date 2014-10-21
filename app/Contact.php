@@ -5,10 +5,10 @@ use Validator;
 
 class Contact extends Eloquent {
 	
-	protected $fillable = ['name', 'email', 'bericht'];
+	protected $fillable = ['naam', 'email', 'bericht'];
 
 	protected static $rules = [ 
-		'name' => 'required',
+		'naam' => 'required',
 		'email' => 'required',
 		'bericht' => 'required'
 	];

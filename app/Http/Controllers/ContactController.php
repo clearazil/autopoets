@@ -21,11 +21,11 @@ class ContactController {
 
 
 
-			Mail::send('contact.mails.mail', array(	'name' => $contact['name'], 
+			Mail::send('contact.mails.mail', array(	'naam' => $contact['naam'], 
 													'bericht' => Input::get('bericht')), 
 			function($message){
 
-				$message->from(Input::get('email'), Input::get('name'));
+				$message->from(Input::get('email'), Input::get('naam'));
 	        	$message->to('derkvanderheide@hotmail.com', 'Derk van der Heide')->subject('Autopoets contact formulier');
 	    	});
 

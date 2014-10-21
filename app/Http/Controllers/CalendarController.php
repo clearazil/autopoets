@@ -50,10 +50,10 @@ class CalendarController {
 
 		$year = ceil(($monthNum / 12) -1) + date('Y');
 
-		$month = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
-
+		//$month = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		
 		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
-
+		$month = $this->monthDutch($calcMonth);
 		$dates = Calendar::whereBetween("date", array("$year-$calcMonth-01", "$year-$calcMonth-$daysMonth"))->get();
 
 		$links = [];
@@ -109,6 +109,25 @@ class CalendarController {
 			'links' => $calendar['links'],
 			'firstDay' => $calendar['firstDay']
 		));
+	}
+
+	public function monthDutch($month) {
+		$months = [
+			1 => 'Januari',
+			2 => 'Februari',
+			3 => 'Maart',
+			4 => 'April',
+			5 => 'Mei',
+			6 => 'Juni',
+			7 => 'Juli',
+			8 => 'Augustus',
+			9 => 'September',
+			10 => 'Oktober',
+			11 => 'November',
+			12 => 'December'
+		];
+
+		return $months[$month];
 	}
 
 

@@ -11,9 +11,9 @@
 	@endif
 	{!! Form::open(['url' => '/contact', 'class' => 'contact']) !!}
 		<div class="form-group">
-		{!! Form::label('name', 'Naam: ') !!}
-		{!! Form::text('name') !!}
-		{{ $errors->first('name') }}
+		{!! Form::label('naam', 'Naam: ') !!}
+		{!! Form::text('naam') !!}
+		{{ $errors->first('naam') }}
 		</div>
 		<div class="form-group">
 		{!! Form::label('email', 'Email: ') !!}

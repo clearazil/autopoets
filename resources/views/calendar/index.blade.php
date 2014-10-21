@@ -4,8 +4,9 @@
     <div class="container_12">
         <div class="">
         <h1>Agenda</h1>
+        <div class="calendar">
 			@include('calendar/partials/_calendar')	
-			
+		</div>	
 			@if(isset($calendarInfo))
 				<div class="cal-details">
 					<h1>{{ $calendarInfo->title }}</h1>
