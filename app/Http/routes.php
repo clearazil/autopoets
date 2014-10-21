@@ -15,12 +15,20 @@ Route::get('/', function() {
 	return view('index');
 });
 
-Route::get('/contact', 'ContactController@index');
-
-Route::post('contact', 'ContactController@send');
+Route::get('/about', function() {
+	return view('about.index');
+});
 
 Route::get('/calendar', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 Route::get('/calendar/date', 'CalendarController@show');
 Route::get('/calendar/{month}', 'CalendarController@index');
 Route::get('/calendar/{monthNum}/{dayNum}/', 'CalendarController@show');
+
+Route::get('/gallery', function() {
+	return view('gallery.index');
+});
+
 Route::get('/products', 'ProductsController@index');
+
+Route::get('/contact', 'ContactController@index');
+Route::post('contact', 'ContactController@send');

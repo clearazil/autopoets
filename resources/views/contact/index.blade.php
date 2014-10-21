@@ -3,8 +3,11 @@
 <section id="content">
     <div class="container_12">
         <div class="">
+        <h1>Contact</h1>
 	@if(isset($thanks))
 		{{ $thanks }}
+	@else
+		<p>Vul dit formulier in om contact met mij op te nemen.</p>
 	@endif
 	{!! Form::open(['url' => '/contact', 'class' => 'contact']) !!}
 		<div class="form-group">

@@ -3,14 +3,19 @@
 <section id="content">
     <div class="container_12">
         <div class="">
+        <h1>Agenda</h1>
 			@include('calendar/partials/_calendar')	
+			
 			@if(isset($calendarInfo))
-				<h1>{{ $calendarInfo->title }}</h1>
+				<div class="cal-details">
+					<h1>{{ $calendarInfo->title }}</h1>
 
-				<p>{{ $calendarInfo->address }}</p>
+					<p>{{ $calendarInfo->address }}</p>
 
-				<p>{{ $calendarInfo->description }}</p>
+					<p>{{ $calendarInfo->description }}</p>
+				</div>
 			@endif
+		<div class="clear"></div>
 		</div>
 	</div>
 </section>

@@ -39,9 +39,9 @@
  	
 	<div id="slider-wrapper">        
             <div id="slider" class="nivoSlider">
-                <img src="images/slider1.jpg" alt="" />
-                <img src="images/slider2.jpg" alt=""/>
-                <img src="images/slider3.jpg" alt="" />
+                {!! HTML::image('images/slider1.jpg') !!}
+                {!! HTML::image('images/slider2.jpg') !!}
+                {!! HTML::image('images/slider3.jpg') !!}
             </div>        
         </div>
 
@@ -68,11 +68,11 @@
             <article class="grid_6">
                 <div class="wrapper">
                     <ul class="soc_list">
-                    	<li><a href="https://www.facebook.com/perloplast"><img src="images/f1.png" alt=""></a></li>
+                    	<li><a href="https://www.facebook.com/perloplast" target="_blank">{!! HTML::image('images/f1.png') !!}</a></li>
                     	<!--
                     	<li><a href="#"><img src="/images/f2.png" alt=""></a></li>
                     	<li><a href="#"><img src="/images/f3.png" alt=""></a></li>
-                    	-->
+                    	--> 
                     </ul>
                 </div>
             </article>
