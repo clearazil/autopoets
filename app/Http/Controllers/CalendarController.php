@@ -42,20 +42,29 @@ class CalendarController {
 
 	public function calendar($monthNum) {
 
+		// if $monthNum is empty, set the month number to the current month
 		if(!strlen($monthNum)) {
 			$monthNum = date('n');
 		}
+
+		// amount of days of the month specified by $monthNum
 		$daysMonth = date('t', mktime(0, 0, 0, $monthNum, 1, date('Y')));
+		// The first day of $monthNum
 		$firstDay = date('w',mktime(0, 0, 0, $monthNum, 1, date('Y')));
 
+		// Get the year
 		$year = ceil(($monthNum / 12) -1) + date('Y');
-
-		//$month = date('F', mktime(0, 0, 0, $monthNum, 1, date('Y')));
 		
+		// Get a month number between 1 and 12
 		$calcMonth = $monthNum - ((ceil(($monthNum / 12)-1)*12));
+
+		// Get the Dutch translation for the month
 		$month = $this->monthDutch($calcMonth);
+
+		// Get all the rows in the Calendar table where the date is between the first day and the last day of the month.
 		$dates = Calendar::whereBetween("date", array("$year-$calcMonth-01", "$year-$calcMonth-$daysMonth"))->get();
 
+		// Load all the dates that should be links in the $links array
 		$links = [];
 		foreach($dates as $date) {
 			$links[] = date('j', strtotime($date->date));
@@ -64,17 +73,22 @@ class CalendarController {
 		$links = array_flip($links);
 		
 
-
+		// If the month starts on Sunday, set it to 7 (make it the last day of the week)
 		if($firstDay == 0) {
 			$firstDay = 7;
 		}
 		$firstDay = $firstDay - 1;
+
+		// Get the amount of days of the previous month
 		$prevMonth = date('t', mktime(0, 0, 0, $monthNum-1, 1, date('Y')));
 		$days = [];
+
+		//Get the days of the previous month needed in the $days array
 		for($i=$prevMonth-$firstDay;$i<$prevMonth;$i++) {
 			$days[] = $i+1;
 		}
 
+		//Get all the days of the current month and put them into the $days array
 		for($i=1;$i<=$daysMonth;$i++) {
 			$days[] = $i;
 		}
@@ -90,6 +104,9 @@ class CalendarController {
 		return $calendar;
 	}
 
+	/*
+	 * Show details for the specific days
+	 */
 	public function show($monthNum, $dayNum) {
 
 		$calendar = $this->calendar($monthNum);
@@ -111,6 +128,9 @@ class CalendarController {
 		));
 	}
 
+	/*
+	 * Translate the months into Dutch
+	 */
 	public function monthDutch($month) {
 		$months = [
 			1 => 'Januari',

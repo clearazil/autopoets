@@ -35,3 +35,7 @@ Route::get('/products', 'ProductsController@index');
 
 Route::get('/contact', 'ContactController@index');
 Route::post('contact', 'ContactController@send');
+
+Route::get('/admin', function() {
+	return "Admin area";
+});
