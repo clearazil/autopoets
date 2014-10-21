@@ -535,6 +535,7 @@ table {
 	height: 100%;
 	display: block;
 	background-color: #FF6347;
+	text-decoration: none;
 }
 .day a:hover {
 	background-color: #DB3535;
@@ -570,4 +571,8 @@ label {
 .contact input[type="submit"] {
 	margin-left: 5em;
 	width: 100px;
+}
+
+.form-group {
+	padding: 5px 0 5px 0;
 }

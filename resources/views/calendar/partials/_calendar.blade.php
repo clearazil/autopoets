@@ -1,7 +1,8 @@
 
 	<div class="cal-nav">
-	<div id="month"><a href="/calendar/{{ $monthNum-1 }}"><</a> {{ $month }} <a href="/calendar/{{ $monthNum+1 }}">></a></div>
-	<div id="year"><a href="/calendar/{{ $monthNum-12 }}"><</a> {{ $year }} <a href="/calendar/{{ $monthNum+12 }}">></a></div>
+
+	<div id="month">{!! link_to('calendar/' . ($monthNum-1), '<') !!} {{ $month }} {!! link_to('calendar/' . ($monthNum+1), '>') !!}</div>
+	<div id="year">{!! link_to('calendar/' . ($monthNum-12), '<') !!} {{ $year }} {!! link_to('calendar/' . ($monthNum+12), '>') !!}</div>
 	</div>
 	<div class="cal">
 	<table>
