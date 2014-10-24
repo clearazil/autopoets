@@ -21,7 +21,7 @@ class ContactController {
 
 
 
-			Mail::send('contact.mails.mail', array(	'naam' => $contact['naam'], 
+			Mail::send('contact.mails.mail', array(	'name' => $contact['naam'], 
 													'bericht' => Input::get('bericht')), 
 			function($message){
 

@@ -62,6 +62,7 @@ class CalendarController {
 		$month = $this->monthDutch($calcMonth);
 
 		// Get all the rows in the Calendar table where the date is between the first day and the last day of the month.
+		$dates = [];
 		$dates = Calendar::whereBetween("date", array("$year-$calcMonth-01", "$year-$calcMonth-$daysMonth"))->get();
 
 		// Load all the dates that should be links in the $links array
@@ -85,13 +86,28 @@ class CalendarController {
 
 		//Get the days of the previous month needed in the $days array
 		for($i=$prevMonth-$firstDay;$i<$prevMonth;$i++) {
-			$days[] = $i+1;
+			$days[] = [
+				"day" => $i+1,
+				"grey" => true
+			];
 		}
 
 		//Get all the days of the current month and put them into the $days array
 		for($i=1;$i<=$daysMonth;$i++) {
-			$days[] = $i;
+			$days[] = [
+				"day" => $i,
+				"grey" => false
+			];
 		}
+		$count = count($days);
+		for($i = $count, $k = 1; $i < 42; $i++, $k++) {
+			$days[] = [
+				"day" => $k,
+				"grey" => true
+			];
+		}
+		//dd($days);
+		//dd(count($days));
 
 		$calendar['days'] = $days;
 		$calendar['month'] = $month;

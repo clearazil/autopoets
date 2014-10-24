@@ -518,16 +518,23 @@ table {
  	border: 1px solid black;
  	border-collapse: collapse;
  }
- .title td {
+ .cal .title td {
  	background-color: black;
  	color: white;
  	padding: 0 0.5em;
  	border: none;
+ 	height: 20px;
  }
+.cal td {
+	background-color: #B6B6B6;
+	height: 60px;
 
-.day {
+}
+.cal .day {
 	background-color: white;
-	height: 80px;
+}
+.gray {
+	color: gray;
 }
 
 .day a {
@@ -543,7 +550,7 @@ table {
 .cal {
 	float: left;
 	position: relative;
-	width: 60%;
+	width: 55%;
 }
 .cal-details {
 	float: left;
