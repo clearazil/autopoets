@@ -167,6 +167,12 @@ footer a {
 	box-shadow:1px 2px #cad6da;
 	display:inline-block;
 }
+.figure-3 img {
+	border:7px solid #fff;
+	box-shadow:1px 2px #cad6da;
+	display:inline-block;
+	width: 362px;
+}
 .map {
 	margin-bottom:15px;
 }
@@ -559,7 +565,7 @@ table {
 }
 
 /*********************contact**************/
-label {
+.contact label {
 	width: 4em;
 	float: left;
 	margin-right: 0.5em;

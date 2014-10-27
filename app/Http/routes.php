@@ -36,6 +36,10 @@ Route::get('/products', 'ProductsController@index');
 Route::get('/contact', 'ContactController@index');
 Route::post('contact', 'ContactController@send');
 
-Route::get('/admin', function() {
+Route::get('/admin', ['before' => 'auth', function() {
 	return "Admin area";
-});
+}]);
+
+Route::get('login', 'SessionsController@create');
+Route::get('logout', 'SessionsController@destroy');
+Route::resource('sessions', 'SessionsController');
