@@ -11,8 +11,6 @@
 |
 */
 
-$env = $app->detectEnvironment([
-
-	'local' => ['homestead'],
-
-]);
+$env = $app->detectEnvironment(function() use($app) {
+    return getenv('APP_ENV') ?: ($app->runningInConsole() ? 'local' : 'production');
+});

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Seeds\UsersTableSeeder;
+use Illuminate\Database\Seeds;
 
 class DatabaseSeeder extends Seeder {
 
@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('UserTableSeeder');
+		$this->call('AboutTableSeeder');
 	}
 
 }

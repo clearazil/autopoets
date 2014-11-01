@@ -4,11 +4,17 @@ use Illuminate\Routing\Controller;
 use App\Calendar;
 use Redirect;
 
-class CalendarController {
+class CalendarController extends Controller {
  
 	
 
-
+	/**
+	 * @Get("calendar")
+	 * @Get("calendar/{monthNum}")
+	 * [index description]
+	 * @param  string $monthNum [description]
+	 * @return [type]           [description]
+	 */
 	public function index($monthNum = "") {
 
 		$calendar = $this->calendar($monthNum);
@@ -120,8 +126,12 @@ class CalendarController {
 		return $calendar;
 	}
 
-	/*
+	/**
+	 * @Get("calendar/{monthNum}/{dayNum}")
 	 * Show details for the specific days
+	 * @param  [type] $monthNum [description]
+	 * @param  [type] $dayNum   [description]
+	 * @return [type]           [description]
 	 */
 	public function show($monthNum, $dayNum) {
 

@@ -8,11 +8,21 @@ use Input;
 use Validator;
 
 
-class ContactController {
+class ContactController extends Controller {
+	/**
+	 * @Get("contact")
+	 * [index description]
+	 * @return [type] [description]
+	 */
 	public function index() {
 		return view('contact.index');
 	}
 
+	/**
+	 * @Post("contact")
+	 * [send description]
+	 * @return [type] [description]
+	 */
 	public function send() {
 		$contact = new Contact(Input::all());
 		

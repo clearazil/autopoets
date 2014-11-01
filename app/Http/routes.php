@@ -18,9 +18,9 @@ Route::get('/', function() {
 	return view('index');
 });
 
-Route::get('/about', function() {
-	return view('about.index');
-});
+Route::get('/about', 'AboutController@index');
+Route::get('about/edit', ['before' => 'auth', 'uses' => 'AboutController@edit']);
+Route::patch('about/edit', ['before' => 'auth', 'uses' => 'AboutController@update']);
 
 Route::get('/calendar', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 Route::get('/calendar/date', 'CalendarController@show');
@@ -36,9 +36,8 @@ Route::get('/products', 'ProductsController@index');
 Route::get('/contact', 'ContactController@index');
 Route::post('contact', 'ContactController@send');
 
-Route::get('/admin', ['before' => 'auth', function() {
-	return "Admin area";
-}]);
+Route::get('/admin', ['before' => 'auth', 'uses' => 'SessionsController@index']);
+
 
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');

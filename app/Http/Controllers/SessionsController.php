@@ -5,7 +5,15 @@ use Auth;
 use Input;
 use Redirect;
 
-class SessionsController {
+/**
+ * @Resource("sessions")
+ */
+class SessionsController extends Controller {
+	/**
+	 * @Get("login")
+	 * [create description]
+	 * @return [type] [description]
+	 */
 	public function create() {
 		if(Auth::check()) {
 			return Redirect::to('/admin');
@@ -15,15 +23,30 @@ class SessionsController {
 
 	public function store() {
 		if (Auth::attempt(Input::only('username', 'password'))) {
-			return "Welkom, " . Auth::user()->username;
+			return Redirect::to('/admin');//"Welkom, " . Auth::user()->username;
 		}
 		return 'failed!';
 	}
 
+	/**
+	 * @Get("logout")
+	 * [destroy description]
+	 * @return [type] [description]
+	 */
 	public function destroy() {
 		Auth::logout();
 
-		return Redirect::route('sessions.create');
+		return Redirect::to('/login');
 
+	}
+
+	/**
+	 * @Middleware("auth")
+	 * @Get("admin")
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function index() {
+		return view('admin.index');
 	}
 }
